@@ -12,7 +12,7 @@ const actions = [
 
 export default function ReceivingHomeScreen() {
   const navigate = useNavigate();
-  const pending = inboundLots.filter(l => l.status === 'PENDING' || l.status === 'IN_INSPECTION');
+  const pending = inboundLots.filter(l => l.status === 'PENDING_QA' || l.status === 'ON_HOLD');
 
   return (
     <div className="space-y-4">
