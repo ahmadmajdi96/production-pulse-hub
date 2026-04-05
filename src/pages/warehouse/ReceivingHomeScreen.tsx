@@ -57,7 +57,7 @@ export default function ReceivingHomeScreen() {
               className="data-card p-3 cursor-pointer hover:border-primary/30 transition-all">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm font-semibold text-foreground">{lot.materialName}</p>
+                  <p className="text-sm font-semibold text-foreground">{lot.material}</p>
                   <p className="text-[10px] text-muted-foreground font-mono">{lot.supplier} · PO {lot.poNumber}</p>
                   <p className="text-[10px] text-muted-foreground mt-0.5">Qty: {lot.quantity} {lot.unit} · Exp: {lot.expiryDate}</p>
                 </div>
