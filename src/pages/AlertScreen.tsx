@@ -1,8 +1,9 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { alerts } from "@/data/mockData";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import { AlertTriangle, AlertCircle, Info, CheckCircle2 } from "lucide-react";
+import { AlertTriangle, AlertCircle, Info, CheckCircle2, Wrench } from "lucide-react";
 
 const severityConfig = {
   CRITICAL: { icon: AlertCircle, bg: 'bg-destructive', text: 'text-destructive-foreground', border: 'border-destructive' },
