@@ -132,7 +132,11 @@ export default function DashboardScreen() {
           {upcomingActions.map(action => {
             const ActionIcon = actionIcons[action.type];
             return (
-              <div key={action.id} className="data-card flex items-center gap-3 p-3">
+              <div key={action.id} onClick={() => {
+                    if (action.type === 'run_start') navigate('/supervisor/run-start');
+                    else if (action.type === 'maintenance') navigate('/maintenance');
+                    else if (action.type === 'cip_window') navigate('/maintenance/cip');
+                  }} className="data-card flex items-center gap-3 p-3 cursor-pointer hover:border-primary/30 transition-colors">
                 <div className={cn(
                   "flex h-8 w-8 items-center justify-center rounded-lg",
                   action.type === 'run_start' ? 'bg-primary/20 text-primary' :
