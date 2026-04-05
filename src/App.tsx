@@ -36,9 +36,16 @@ const App = () => (
             <Route path="/transition" element={<TransitionScreen />} />
             <Route path="/cip" element={<CIPScreen />} />
             <Route path="/idle" element={<IdleScreen />} />
-            <Route path="*" element={<NotFound />} />
           </Routes>
         </AppLayout>
+        <Routes>
+          <Route path="/supervisor" element={<SupervisorLayout><DashboardScreen /></SupervisorLayout>} />
+          <Route path="/supervisor/run-start" element={<SupervisorLayout><RunStartWizardScreen /></SupervisorLayout>} />
+          <Route path="/supervisor/schedule" element={<SupervisorLayout><ScheduleScreen /></SupervisorLayout>} />
+        </Routes>
+        <Routes>
+          <Route path="*" element={null} />
+        </Routes>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
