@@ -53,10 +53,11 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           {/* Home / App Launcher */}
+          <Route path="/" element={<HomePage />} />
           <Route path="/home" element={<HomePage />} />
 
           {/* EA1: Operator Floor Display */}
-          <Route path="/" element={<AppLayout><RunStatusScreen /></AppLayout>} />
+          <Route path="/operator" element={<AppLayout><RunStatusScreen /></AppLayout>} />
           <Route path="/ccp" element={<AppLayout><CCPScreen /></AppLayout>} />
           <Route path="/spc" element={<AppLayout><SPCScreen /></AppLayout>} />
           <Route path="/alerts" element={<AppLayout><AlertScreen /></AppLayout>} />
