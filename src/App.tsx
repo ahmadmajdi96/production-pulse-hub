@@ -26,25 +26,23 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <AppLayout>
-          <Routes>
-            <Route path="/" element={<RunStatusScreen />} />
-            <Route path="/ccp" element={<CCPScreen />} />
-            <Route path="/spc" element={<SPCScreen />} />
-            <Route path="/alerts" element={<AlertScreen />} />
-            <Route path="/shift" element={<ShiftScreen />} />
-            <Route path="/transition" element={<TransitionScreen />} />
-            <Route path="/cip" element={<CIPScreen />} />
-            <Route path="/idle" element={<IdleScreen />} />
-          </Routes>
-        </AppLayout>
         <Routes>
+          {/* EA1: Operator Floor Display */}
+          <Route path="/" element={<AppLayout><RunStatusScreen /></AppLayout>} />
+          <Route path="/ccp" element={<AppLayout><CCPScreen /></AppLayout>} />
+          <Route path="/spc" element={<AppLayout><SPCScreen /></AppLayout>} />
+          <Route path="/alerts" element={<AppLayout><AlertScreen /></AppLayout>} />
+          <Route path="/shift" element={<AppLayout><ShiftScreen /></AppLayout>} />
+          <Route path="/transition" element={<AppLayout><TransitionScreen /></AppLayout>} />
+          <Route path="/cip" element={<AppLayout><CIPScreen /></AppLayout>} />
+          <Route path="/idle" element={<AppLayout><IdleScreen /></AppLayout>} />
+
+          {/* EA2: Supervisor Mobile App */}
           <Route path="/supervisor" element={<SupervisorLayout><DashboardScreen /></SupervisorLayout>} />
           <Route path="/supervisor/run-start" element={<SupervisorLayout><RunStartWizardScreen /></SupervisorLayout>} />
           <Route path="/supervisor/schedule" element={<SupervisorLayout><ScheduleScreen /></SupervisorLayout>} />
-        </Routes>
-        <Routes>
-          <Route path="*" element={null} />
+
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
     </TooltipProvider>
