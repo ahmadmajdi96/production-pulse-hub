@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { AlertTriangle, Clock, Wrench, Filter, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { workOrders, type WorkOrder } from "@/data/maintenanceMockData";
+import { countdown } from "@/hooks/useSimulation";
 
 type FilterType = 'IMMEDIATE' | 'TODAY' | 'ALL';
 
@@ -21,21 +22,32 @@ const statusColors: Record<string, string> = {
 
 export default function WorkOrderQueueScreen() {
   const [filter, setFilter] = useState<FilterType>('IMMEDIATE');
+  const [orders, setOrders] = useState(workOrders);
+
+  // SLA countdown every 30s
+  useEffect(() => {
+    const id = setInterval(() => {
+      setOrders(prev => prev.map(wo =>
+        wo.slaRemaining > 0 ? { ...wo, slaRemaining: countdown(wo.slaRemaining) } : wo
+      ));
+    }, 30000);
+    return () => clearInterval(id);
+  }, []);
 
   const filtered = filter === 'IMMEDIATE'
-    ? workOrders.filter(wo => wo.type === 'IMMEDIATE')
+    ? orders.filter(wo => wo.type === 'IMMEDIATE')
     : filter === 'TODAY'
-    ? workOrders.filter(wo => wo.status !== 'COMPLETED')
-    : workOrders;
+    ? orders.filter(wo => wo.status !== 'COMPLETED')
+    : orders;
 
-  const immediateCount = workOrders.filter(w => w.type === 'IMMEDIATE').length;
-  const todayCount = workOrders.filter(w => w.status !== 'COMPLETED').length;
+  const immediateCount = orders.filter(w => w.type === 'IMMEDIATE').length;
+  const todayCount = orders.filter(w => w.status !== 'COMPLETED').length;
 
   return (
     <div className="space-y-4">
       <div>
         <h1 className="text-2xl font-bold text-foreground">Work Orders</h1>
-        <p className="text-sm text-muted-foreground">Maintenance Technician · {workOrders.length} orders</p>
+        <p className="text-sm text-muted-foreground">Maintenance Technician · {orders.length} orders</p>
       </div>
 
       {/* Filters */}
@@ -43,7 +55,7 @@ export default function WorkOrderQueueScreen() {
         {[
           { key: 'IMMEDIATE' as FilterType, label: 'Immediate', count: immediateCount },
           { key: 'TODAY' as FilterType, label: 'Today', count: todayCount },
-          { key: 'ALL' as FilterType, label: 'All', count: workOrders.length },
+          { key: 'ALL' as FilterType, label: 'All', count: orders.length },
         ].map(f => (
           <button
             key={f.key}
@@ -94,7 +106,7 @@ export default function WorkOrderQueueScreen() {
                   <span className="flex items-center gap-0.5"><Clock className="h-3 w-3" /> {wo.timeRaised}</span>
                   {wo.slaRemaining > 0 && (
                     <span className={cn("flex items-center gap-0.5 font-mono font-bold",
-                      wo.slaRemaining < 30 ? "text-status-critical" : "text-muted-foreground"
+                      wo.slaRemaining < 30 ? "text-status-critical animate-pulse" : "text-muted-foreground"
                     )}>
                       SLA: {wo.slaRemaining}m
                     </span>

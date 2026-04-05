@@ -1,10 +1,48 @@
+import { useState, useEffect } from "react";
 import { cipData } from "@/data/mockData";
 import { cn } from "@/lib/utils";
 import { CheckCircle2, Loader2, Circle } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
+import { jitter, advanceElapsed } from "@/hooks/useSimulation";
 
 export default function CIPScreen() {
-  const { steps, temperature, flowRate, concentration, contactTime, outcome } = cipData;
+  const [data, setData] = useState(cipData);
+
+  // Simulate CIP progress every 3s
+  useEffect(() => {
+    const id = setInterval(() => {
+      setData(prev => {
+        const steps = prev.steps.map(step => {
+          if (step.status === 'active') {
+            const newElapsed = advanceElapsed(step.elapsedMinutes, step.durationMinutes);
+            if (newElapsed >= step.durationMinutes) {
+              return { ...step, elapsedMinutes: step.durationMinutes, status: 'completed' as const };
+            }
+            return { ...step, elapsedMinutes: newElapsed };
+          }
+          return step;
+        });
+        const hasActive = steps.some(s => s.status === 'active');
+        if (!hasActive) {
+          const nextPending = steps.findIndex(s => s.status === 'pending');
+          if (nextPending !== -1) steps[nextPending] = { ...steps[nextPending], status: 'active' };
+        }
+        const allDone = steps.every(s => s.status === 'completed');
+        return {
+          ...prev,
+          steps,
+          outcome: allDone ? 'VERIFIED' as const : prev.outcome,
+          temperature: { ...prev.temperature, actual: jitter(prev.temperature.actual, 0.01) },
+          flowRate: { ...prev.flowRate, actual: jitter(prev.flowRate.actual, 0.02) },
+          concentration: { ...prev.concentration, actual: jitter(prev.concentration.actual, 0.01) },
+          contactTime: { ...prev.contactTime, actual: advanceElapsed(prev.contactTime.actual, prev.contactTime.required, 0.5) },
+        };
+      });
+    }, 3000);
+    return () => clearInterval(id);
+  }, []);
+
+  const { steps, temperature, flowRate, concentration, contactTime, outcome } = data;
   const totalDuration = steps.reduce((s, st) => s + st.durationMinutes, 0);
   const totalElapsed = steps.reduce((s, st) => s + st.elapsedMinutes, 0);
   const overallPct = Math.round((totalElapsed / totalDuration) * 100);
