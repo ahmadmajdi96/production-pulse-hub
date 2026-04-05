@@ -1,15 +1,18 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import { LayoutDashboard, Rocket, Calendar, ArrowLeft, Activity, ArrowRightLeft, FileWarning, BookOpen } from "lucide-react";
+import { LayoutDashboard, Rocket, Calendar, ArrowLeft, Activity, ArrowRightLeft, FileWarning, BookOpen, Shield, Clock, Wrench } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const tabs = [
-  { path: '/supervisor', label: 'Dashboard', icon: LayoutDashboard },
+  { path: '/supervisor', label: 'Home', icon: LayoutDashboard },
   { path: '/supervisor/run-detail', label: 'Run', icon: Activity },
   { path: '/supervisor/run-start', label: 'Start', icon: Rocket },
   { path: '/supervisor/transition', label: 'Trans', icon: ArrowRightLeft },
-  { path: '/supervisor/schedule', label: 'Schedule', icon: Calendar },
+  { path: '/supervisor/schedule', label: 'Sched', icon: Calendar },
   { path: '/supervisor/ncr', label: 'NCR', icon: FileWarning },
   { path: '/supervisor/logbook', label: 'Log', icon: BookOpen },
+  { path: '/supervisor/ptw', label: 'PTW', icon: Shield },
+  { path: '/supervisor/downtime', label: 'Down', icon: Clock },
+  { path: '/maintenance', label: 'EA3', icon: Wrench },
 ];
 
 export function SupervisorNav() {

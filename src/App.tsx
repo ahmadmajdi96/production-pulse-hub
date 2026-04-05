@@ -5,6 +5,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { AppLayout } from "@/components/AppLayout";
 import { SupervisorLayout } from "@/components/SupervisorLayout";
+import { MaintenanceLayout } from "@/components/MaintenanceLayout";
 import RunStatusScreen from "./pages/RunStatusScreen";
 import CCPScreen from "./pages/CCPScreen";
 import SPCScreen from "./pages/SPCScreen";
@@ -20,6 +21,11 @@ import RunDetailScreen from "./pages/supervisor/RunDetailScreen";
 import TransitionManagerScreen from "./pages/supervisor/TransitionManagerScreen";
 import NCRQuickCreateScreen from "./pages/supervisor/NCRQuickCreateScreen";
 import ShiftLogbookScreen from "./pages/supervisor/ShiftLogbookScreen";
+import PermitToWorkScreen from "./pages/supervisor/PermitToWorkScreen";
+import DowntimeLoggerScreen from "./pages/supervisor/DowntimeLoggerScreen";
+import WorkOrderQueueScreen from "./pages/maintenance/WorkOrderQueueScreen";
+import CIPMonitorScreen from "./pages/maintenance/CIPMonitorScreen";
+import LOTOScreen from "./pages/maintenance/LOTOScreen";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -49,6 +55,13 @@ const App = () => (
           <Route path="/supervisor/schedule" element={<SupervisorLayout><ScheduleScreen /></SupervisorLayout>} />
           <Route path="/supervisor/ncr" element={<SupervisorLayout><NCRQuickCreateScreen /></SupervisorLayout>} />
           <Route path="/supervisor/logbook" element={<SupervisorLayout><ShiftLogbookScreen /></SupervisorLayout>} />
+          <Route path="/supervisor/ptw" element={<SupervisorLayout><PermitToWorkScreen /></SupervisorLayout>} />
+          <Route path="/supervisor/downtime" element={<SupervisorLayout><DowntimeLoggerScreen /></SupervisorLayout>} />
+
+          {/* EA3: Maintenance Technician App */}
+          <Route path="/maintenance" element={<MaintenanceLayout><WorkOrderQueueScreen /></MaintenanceLayout>} />
+          <Route path="/maintenance/cip" element={<MaintenanceLayout><CIPMonitorScreen /></MaintenanceLayout>} />
+          <Route path="/maintenance/loto" element={<MaintenanceLayout><LOTOScreen /></MaintenanceLayout>} />
 
           <Route path="*" element={<NotFound />} />
         </Routes>
