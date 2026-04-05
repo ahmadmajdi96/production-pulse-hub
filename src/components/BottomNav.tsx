@@ -1,5 +1,5 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import { Activity, ShieldCheck, BarChart3, AlertTriangle, Clock } from "lucide-react";
+import { Activity, ShieldCheck, BarChart3, AlertTriangle, Clock, ArrowLeftRight, Droplets, PauseCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const tabs = [
@@ -8,6 +8,9 @@ const tabs = [
   { path: '/spc', label: 'SPC', icon: BarChart3 },
   { path: '/alerts', label: 'Alerts', icon: AlertTriangle },
   { path: '/shift', label: 'Shift', icon: Clock },
+  { path: '/transition', label: 'Transition', icon: ArrowLeftRight },
+  { path: '/cip', label: 'CIP', icon: Droplets },
+  { path: '/idle', label: 'Idle', icon: PauseCircle },
 ];
 
 export function BottomNav() {
@@ -24,11 +27,11 @@ export function BottomNav() {
               key={path}
               onClick={() => navigate(path)}
               className={cn(
-                "flex flex-1 flex-col items-center justify-center gap-1 text-xs font-medium transition-colors",
+                "flex flex-1 flex-col items-center justify-center gap-0.5 text-[10px] font-medium transition-colors",
                 isActive ? "text-primary" : "text-muted-foreground hover:text-foreground"
               )}
             >
-              <Icon className={cn("h-5 w-5", isActive && "drop-shadow-[0_0_6px_hsl(210,100%,56%)]")} />
+              <Icon className={cn("h-4 w-4", isActive && "drop-shadow-[0_0_6px_hsl(210,100%,56%)]")} />
               <span>{label}</span>
             </button>
           );
