@@ -1,10 +1,11 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import { ScanLine, Tag, CalendarClock } from "lucide-react";
+import { ScanLine, Tag, CalendarClock, Package, ArrowRightLeft } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { AppSwitcher } from "./AppSwitcher";
 
 const tabs = [
-  { path: '/warehouse', label: 'Receiving', icon: ScanLine },
+  { path: '/warehouse', label: 'Home', icon: ScanLine },
+  { path: '/warehouse/stage', label: 'Stage', icon: Package },
   { path: '/warehouse/pallets', label: 'Pallets', icon: Tag },
   { path: '/warehouse/fefo', label: 'FEFO', icon: CalendarClock },
 ];
