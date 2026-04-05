@@ -1,5 +1,5 @@
 import { useNavigate, useLocation } from "react-router-dom";
-import { Home, Monitor, UserCog, Wrench, Package } from "lucide-react";
+import { Home, Monitor, UserCog, Wrench, Package, Zap } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const apps = [
@@ -8,6 +8,7 @@ const apps = [
   { path: '/supervisor', label: 'EA2', icon: UserCog },
   { path: '/maintenance', label: 'EA3', icon: Wrench },
   { path: '/warehouse', label: 'EA4', icon: Package },
+  { path: '/energy', label: 'EA5', icon: Zap },
 ];
 
 export function AppSwitcher({ current }: { current: string }) {
