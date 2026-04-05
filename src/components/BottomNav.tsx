@@ -1,5 +1,5 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import { Activity, ShieldCheck, BarChart3, AlertTriangle, Clock, ArrowLeftRight, Droplets, PauseCircle } from "lucide-react";
+import { Activity, ShieldCheck, BarChart3, AlertTriangle, Clock, ArrowLeftRight, Droplets, PauseCircle, UserCog } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const tabs = [
@@ -8,9 +8,10 @@ const tabs = [
   { path: '/spc', label: 'SPC', icon: BarChart3 },
   { path: '/alerts', label: 'Alerts', icon: AlertTriangle },
   { path: '/shift', label: 'Shift', icon: Clock },
-  { path: '/transition', label: 'Transition', icon: ArrowLeftRight },
+  { path: '/transition', label: 'Trans', icon: ArrowLeftRight },
   { path: '/cip', label: 'CIP', icon: Droplets },
   { path: '/idle', label: 'Idle', icon: PauseCircle },
+  { path: '/supervisor', label: 'EA2', icon: UserCog },
 ];
 
 export function BottomNav() {
