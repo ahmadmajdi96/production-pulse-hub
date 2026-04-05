@@ -4,6 +4,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { AppLayout } from "@/components/AppLayout";
+import { SupervisorLayout } from "@/components/SupervisorLayout";
 import RunStatusScreen from "./pages/RunStatusScreen";
 import CCPScreen from "./pages/CCPScreen";
 import SPCScreen from "./pages/SPCScreen";
@@ -12,6 +13,9 @@ import ShiftScreen from "./pages/ShiftScreen";
 import TransitionScreen from "./pages/TransitionScreen";
 import CIPScreen from "./pages/CIPScreen";
 import IdleScreen from "./pages/IdleScreen";
+import DashboardScreen from "./pages/supervisor/DashboardScreen";
+import RunStartWizardScreen from "./pages/supervisor/RunStartWizardScreen";
+import ScheduleScreen from "./pages/supervisor/ScheduleScreen";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -22,19 +26,24 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <AppLayout>
-          <Routes>
-            <Route path="/" element={<RunStatusScreen />} />
-            <Route path="/ccp" element={<CCPScreen />} />
-            <Route path="/spc" element={<SPCScreen />} />
-            <Route path="/alerts" element={<AlertScreen />} />
-            <Route path="/shift" element={<ShiftScreen />} />
-            <Route path="/transition" element={<TransitionScreen />} />
-            <Route path="/cip" element={<CIPScreen />} />
-            <Route path="/idle" element={<IdleScreen />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </AppLayout>
+        <Routes>
+          {/* EA1: Operator Floor Display */}
+          <Route path="/" element={<AppLayout><RunStatusScreen /></AppLayout>} />
+          <Route path="/ccp" element={<AppLayout><CCPScreen /></AppLayout>} />
+          <Route path="/spc" element={<AppLayout><SPCScreen /></AppLayout>} />
+          <Route path="/alerts" element={<AppLayout><AlertScreen /></AppLayout>} />
+          <Route path="/shift" element={<AppLayout><ShiftScreen /></AppLayout>} />
+          <Route path="/transition" element={<AppLayout><TransitionScreen /></AppLayout>} />
+          <Route path="/cip" element={<AppLayout><CIPScreen /></AppLayout>} />
+          <Route path="/idle" element={<AppLayout><IdleScreen /></AppLayout>} />
+
+          {/* EA2: Supervisor Mobile App */}
+          <Route path="/supervisor" element={<SupervisorLayout><DashboardScreen /></SupervisorLayout>} />
+          <Route path="/supervisor/run-start" element={<SupervisorLayout><RunStartWizardScreen /></SupervisorLayout>} />
+          <Route path="/supervisor/schedule" element={<SupervisorLayout><ScheduleScreen /></SupervisorLayout>} />
+
+          <Route path="*" element={<NotFound />} />
+        </Routes>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>

@@ -1,26 +1,27 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import { Activity, ShieldCheck, BarChart3, AlertTriangle, Clock, ArrowLeftRight, Droplets, PauseCircle, UserCog } from "lucide-react";
+import { LayoutDashboard, Rocket, Calendar, ArrowLeft } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const tabs = [
-  { path: '/', label: 'Run Status', icon: Activity },
-  { path: '/ccp', label: 'CCP', icon: ShieldCheck },
-  { path: '/spc', label: 'SPC', icon: BarChart3 },
-  { path: '/alerts', label: 'Alerts', icon: AlertTriangle },
-  { path: '/shift', label: 'Shift', icon: Clock },
-  { path: '/transition', label: 'Trans', icon: ArrowLeftRight },
-  { path: '/cip', label: 'CIP', icon: Droplets },
-  { path: '/idle', label: 'Idle', icon: PauseCircle },
-  { path: '/supervisor', label: 'EA2', icon: UserCog },
+  { path: '/supervisor', label: 'Dashboard', icon: LayoutDashboard },
+  { path: '/supervisor/run-start', label: 'Run Start', icon: Rocket },
+  { path: '/supervisor/schedule', label: 'Schedule', icon: Calendar },
 ];
 
-export function BottomNav() {
+export function SupervisorNav() {
   const location = useLocation();
   const navigate = useNavigate();
 
   return (
     <nav className="fixed bottom-0 left-0 right-0 z-40 border-t border-border bg-card/95 backdrop-blur-sm">
       <div className="flex h-16">
+        <button
+          onClick={() => navigate('/')}
+          className="flex flex-col items-center justify-center gap-0.5 px-4 text-[10px] font-medium text-muted-foreground hover:text-foreground transition-colors border-r border-border"
+        >
+          <ArrowLeft className="h-4 w-4" />
+          <span>EA1</span>
+        </button>
         {tabs.map(({ path, label, icon: Icon }) => {
           const isActive = location.pathname === path;
           return (
