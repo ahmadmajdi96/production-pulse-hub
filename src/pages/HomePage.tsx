@@ -4,15 +4,15 @@ import { cn } from "@/lib/utils";
 
 const edgeApps = [
   {
-    id: 'ea1', label: 'EA1: Operator Floor Display', path: '/',
+    id: 'ea1', label: 'EA1: Operator Floor Display', path: '/operator',
     icon: Monitor, color: 'bg-primary/15 border-primary/30 text-primary',
     description: 'Wall-mounted HMI — run status, CCP, SPC, alerts, CIP, shift handover.',
     screens: 8, status: 'RUNNING',
     quickLinks: [
-      { label: 'Run Status', path: '/' },
-      { label: 'CCP', path: '/ccp' },
-      { label: 'Alerts', path: '/alerts' },
-      { label: 'CIP', path: '/cip' },
+      { label: 'Run Status', path: '/operator' },
+      { label: 'CCP', path: '/operator/ccp' },
+      { label: 'Alerts', path: '/operator/alerts' },
+      { label: 'CIP', path: '/operator/cip' },
     ],
   },
   {

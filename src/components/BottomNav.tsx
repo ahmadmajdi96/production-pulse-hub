@@ -4,14 +4,14 @@ import { cn } from "@/lib/utils";
 import { AppSwitcher } from "./AppSwitcher";
 
 const tabs = [
-  { path: '/', label: 'Run', icon: Activity },
-  { path: '/ccp', label: 'CCP', icon: ShieldCheck },
-  { path: '/spc', label: 'SPC', icon: BarChart3 },
-  { path: '/alerts', label: 'Alerts', icon: AlertTriangle },
-  { path: '/shift', label: 'Shift', icon: Clock },
-  { path: '/transition', label: 'Trans', icon: ArrowLeftRight },
-  { path: '/cip', label: 'CIP', icon: Droplets },
-  { path: '/idle', label: 'Idle', icon: PauseCircle },
+  { path: '/operator', label: 'Run', icon: Activity },
+  { path: '/operator/ccp', label: 'CCP', icon: ShieldCheck },
+  { path: '/operator/spc', label: 'SPC', icon: BarChart3 },
+  { path: '/operator/alerts', label: 'Alerts', icon: AlertTriangle },
+  { path: '/operator/shift', label: 'Shift', icon: Clock },
+  { path: '/operator/transition', label: 'Trans', icon: ArrowLeftRight },
+  { path: '/operator/cip', label: 'CIP', icon: Droplets },
+  { path: '/operator/idle', label: 'Idle', icon: PauseCircle },
 ];
 
 export function BottomNav() {
