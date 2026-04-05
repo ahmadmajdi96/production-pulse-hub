@@ -1,9 +1,10 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import { Activity, ShieldCheck, BarChart3, AlertTriangle, Clock, ArrowLeftRight, Droplets, PauseCircle, UserCog } from "lucide-react";
+import { Activity, ShieldCheck, BarChart3, AlertTriangle, Clock, ArrowLeftRight, Droplets, PauseCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { AppSwitcher } from "./AppSwitcher";
 
 const tabs = [
-  { path: '/', label: 'Run Status', icon: Activity },
+  { path: '/', label: 'Run', icon: Activity },
   { path: '/ccp', label: 'CCP', icon: ShieldCheck },
   { path: '/spc', label: 'SPC', icon: BarChart3 },
   { path: '/alerts', label: 'Alerts', icon: AlertTriangle },
@@ -11,7 +12,6 @@ const tabs = [
   { path: '/transition', label: 'Trans', icon: ArrowLeftRight },
   { path: '/cip', label: 'CIP', icon: Droplets },
   { path: '/idle', label: 'Idle', icon: PauseCircle },
-  { path: '/supervisor', label: 'EA2', icon: UserCog },
 ];
 
 export function BottomNav() {
@@ -21,6 +21,7 @@ export function BottomNav() {
   return (
     <nav className="fixed bottom-0 left-0 right-0 z-40 border-t border-border bg-card/95 backdrop-blur-sm">
       <div className="flex h-16">
+        <AppSwitcher current="EA1" />
         {tabs.map(({ path, label, icon: Icon }) => {
           const isActive = location.pathname === path;
           return (

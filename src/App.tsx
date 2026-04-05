@@ -30,6 +30,7 @@ import LOTOScreen from "./pages/maintenance/LOTOScreen";
 import LotReceivingScreen from "./pages/warehouse/LotReceivingScreen";
 import PalletLabelingScreen from "./pages/warehouse/PalletLabelingScreen";
 import FEFOScreen from "./pages/warehouse/FEFOScreen";
+import HomePage from "./pages/HomePage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -41,6 +42,9 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <Routes>
+          {/* Home / App Launcher */}
+          <Route path="/home" element={<HomePage />} />
+
           {/* EA1: Operator Floor Display */}
           <Route path="/" element={<AppLayout><RunStatusScreen /></AppLayout>} />
           <Route path="/ccp" element={<AppLayout><CCPScreen /></AppLayout>} />
