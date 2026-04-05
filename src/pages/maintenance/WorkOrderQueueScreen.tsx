@@ -22,6 +22,7 @@ const statusColors: Record<string, string> = {
 };
 
 export default function WorkOrderQueueScreen() {
+  const navigate = useNavigate();
   const [filter, setFilter] = useState<FilterType>('IMMEDIATE');
   const [orders, setOrders] = useState(workOrders);
 
