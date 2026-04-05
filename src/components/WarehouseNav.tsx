@@ -1,5 +1,5 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import { ScanLine, Tag, CalendarClock, Package, ArrowRightLeft } from "lucide-react";
+import { ScanLine, Tag, CalendarClock, Package } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { AppSwitcher } from "./AppSwitcher";
 
@@ -15,8 +15,8 @@ export function WarehouseNav() {
   const navigate = useNavigate();
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 z-40 border-t border-border bg-card/95 backdrop-blur-sm">
-      <div className="flex h-16">
+    <nav className="fixed bottom-0 left-0 right-0 z-40 border-t border-border bg-card/95 backdrop-blur-sm safe-bottom">
+      <div className="flex h-16 items-stretch">
         <AppSwitcher current="EA4" />
         {tabs.map(({ path, label, icon: Icon }) => {
           const isActive = location.pathname === path;
@@ -25,7 +25,7 @@ export function WarehouseNav() {
               key={path}
               onClick={() => navigate(path)}
               className={cn(
-                "flex flex-1 flex-col items-center justify-center gap-0.5 text-[10px] font-medium transition-colors",
+                "flex flex-1 flex-col items-center justify-center gap-0.5 text-[10px] font-medium transition-colors min-h-[48px]",
                 isActive ? "text-primary" : "text-muted-foreground hover:text-foreground"
               )}
             >
