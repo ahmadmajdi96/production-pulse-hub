@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { AlertTriangle, Clock, Wrench, Filter, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { workOrders, type WorkOrder } from "@/data/maintenanceMockData";
@@ -21,6 +22,7 @@ const statusColors: Record<string, string> = {
 };
 
 export default function WorkOrderQueueScreen() {
+  const navigate = useNavigate();
   const [filter, setFilter] = useState<FilterType>('IMMEDIATE');
   const [orders, setOrders] = useState(workOrders);
 
@@ -77,7 +79,7 @@ export default function WorkOrderQueueScreen() {
       {/* Work order cards */}
       <div className="space-y-2">
         {filtered.map(wo => (
-          <div key={wo.id} className={cn(
+          <div key={wo.id} onClick={() => navigate(`/maintenance/wo?id=${wo.id}`)} className={cn(
             "data-card p-3 cursor-pointer hover:border-primary/30 transition-all",
             wo.type === 'IMMEDIATE' && wo.status === 'OPEN' && "border-status-critical/40"
           )}>

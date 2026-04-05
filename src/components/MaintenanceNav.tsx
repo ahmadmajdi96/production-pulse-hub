@@ -7,6 +7,7 @@ const tabs = [
   { path: '/maintenance', label: 'Work Orders', icon: ClipboardList },
   { path: '/maintenance/cip', label: 'CIP', icon: Droplets },
   { path: '/maintenance/loto', label: 'LOTO', icon: Lock },
+  { path: '/maintenance/pm', label: 'PM', icon: ClipboardList },
 ];
 
 export function MaintenanceNav() {

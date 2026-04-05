@@ -7,6 +7,7 @@ import { AppLayout } from "@/components/AppLayout";
 import { SupervisorLayout } from "@/components/SupervisorLayout";
 import { MaintenanceLayout } from "@/components/MaintenanceLayout";
 import { WarehouseLayout } from "@/components/WarehouseLayout";
+import { EnergyLayout } from "@/components/EnergyLayout";
 import RunStatusScreen from "./pages/RunStatusScreen";
 import CCPScreen from "./pages/CCPScreen";
 import SPCScreen from "./pages/SPCScreen";
@@ -25,11 +26,20 @@ import ShiftLogbookScreen from "./pages/supervisor/ShiftLogbookScreen";
 import PermitToWorkScreen from "./pages/supervisor/PermitToWorkScreen";
 import DowntimeLoggerScreen from "./pages/supervisor/DowntimeLoggerScreen";
 import WorkOrderQueueScreen from "./pages/maintenance/WorkOrderQueueScreen";
+import WorkOrderDetailScreen from "./pages/maintenance/WorkOrderDetailScreen";
+import AssetHealthScreen from "./pages/maintenance/AssetHealthScreen";
 import CIPMonitorScreen from "./pages/maintenance/CIPMonitorScreen";
 import LOTOScreen from "./pages/maintenance/LOTOScreen";
+import PMChecklistScreen from "./pages/maintenance/PMChecklistScreen";
+import ReceivingHomeScreen from "./pages/warehouse/ReceivingHomeScreen";
 import LotReceivingScreen from "./pages/warehouse/LotReceivingScreen";
+import StageMaterialScreen from "./pages/warehouse/StageMaterialScreen";
+import WIPMovementScreen from "./pages/warehouse/WIPMovementScreen";
 import PalletLabelingScreen from "./pages/warehouse/PalletLabelingScreen";
+import DiscrepancyScreen from "./pages/warehouse/DiscrepancyScreen";
 import FEFOScreen from "./pages/warehouse/FEFOScreen";
+import EnergyDashboardScreen from "./pages/energy/EnergyDashboardScreen";
+import EmissionsScreen from "./pages/energy/EmissionsScreen";
 import HomePage from "./pages/HomePage";
 import NotFound from "./pages/NotFound";
 
@@ -68,13 +78,24 @@ const App = () => (
 
           {/* EA3: Maintenance Technician App */}
           <Route path="/maintenance" element={<MaintenanceLayout><WorkOrderQueueScreen /></MaintenanceLayout>} />
+          <Route path="/maintenance/wo" element={<MaintenanceLayout><WorkOrderDetailScreen /></MaintenanceLayout>} />
+          <Route path="/maintenance/asset" element={<MaintenanceLayout><AssetHealthScreen /></MaintenanceLayout>} />
           <Route path="/maintenance/cip" element={<MaintenanceLayout><CIPMonitorScreen /></MaintenanceLayout>} />
           <Route path="/maintenance/loto" element={<MaintenanceLayout><LOTOScreen /></MaintenanceLayout>} />
+          <Route path="/maintenance/pm" element={<MaintenanceLayout><PMChecklistScreen /></MaintenanceLayout>} />
 
           {/* EA4: Goods Receiving / Warehouse */}
-          <Route path="/warehouse" element={<WarehouseLayout><LotReceivingScreen /></WarehouseLayout>} />
+          <Route path="/warehouse" element={<WarehouseLayout><ReceivingHomeScreen /></WarehouseLayout>} />
+          <Route path="/warehouse/receive" element={<WarehouseLayout><LotReceivingScreen /></WarehouseLayout>} />
+          <Route path="/warehouse/stage" element={<WarehouseLayout><StageMaterialScreen /></WarehouseLayout>} />
+          <Route path="/warehouse/wip" element={<WarehouseLayout><WIPMovementScreen /></WarehouseLayout>} />
           <Route path="/warehouse/pallets" element={<WarehouseLayout><PalletLabelingScreen /></WarehouseLayout>} />
+          <Route path="/warehouse/discrepancy" element={<WarehouseLayout><DiscrepancyScreen /></WarehouseLayout>} />
           <Route path="/warehouse/fefo" element={<WarehouseLayout><FEFOScreen /></WarehouseLayout>} />
+
+          {/* EA5: Energy & Sustainability */}
+          <Route path="/energy" element={<EnergyLayout><EnergyDashboardScreen /></EnergyLayout>} />
+          <Route path="/energy/emissions" element={<EnergyLayout><EmissionsScreen /></EnergyLayout>} />
 
           <Route path="*" element={<NotFound />} />
         </Routes>
