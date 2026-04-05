@@ -1,5 +1,5 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import { ClipboardList, Droplets, Lock } from "lucide-react";
+import { ClipboardList, Droplets, Lock, ClipboardCheck } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { AppSwitcher } from "./AppSwitcher";
 
@@ -7,7 +7,7 @@ const tabs = [
   { path: '/maintenance', label: 'Work Orders', icon: ClipboardList },
   { path: '/maintenance/cip', label: 'CIP', icon: Droplets },
   { path: '/maintenance/loto', label: 'LOTO', icon: Lock },
-  { path: '/maintenance/pm', label: 'PM', icon: ClipboardList },
+  { path: '/maintenance/pm', label: 'PM', icon: ClipboardCheck },
 ];
 
 export function MaintenanceNav() {
@@ -15,8 +15,8 @@ export function MaintenanceNav() {
   const navigate = useNavigate();
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 z-40 border-t border-border bg-card/95 backdrop-blur-sm">
-      <div className="flex h-16">
+    <nav className="fixed bottom-0 left-0 right-0 z-40 border-t border-border bg-card/95 backdrop-blur-sm safe-bottom">
+      <div className="flex h-16 items-stretch">
         <AppSwitcher current="EA3" />
         {tabs.map(({ path, label, icon: Icon }) => {
           const isActive = location.pathname === path;
@@ -25,7 +25,7 @@ export function MaintenanceNav() {
               key={path}
               onClick={() => navigate(path)}
               className={cn(
-                "flex flex-1 flex-col items-center justify-center gap-0.5 text-[10px] font-medium transition-colors",
+                "flex flex-1 flex-col items-center justify-center gap-0.5 text-[10px] font-medium transition-colors min-h-[48px]",
                 isActive ? "text-primary" : "text-muted-foreground hover:text-foreground"
               )}
             >
