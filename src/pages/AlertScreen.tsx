@@ -13,6 +13,7 @@ const severityConfig = {
 };
 
 export default function AlertScreen() {
+  const navigate = useNavigate();
   const [alertList, setAlertList] = useState(alerts);
 
   const criticalAlert = alertList.find(a => a.severity === 'CRITICAL' && !a.acknowledged);
