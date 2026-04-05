@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { AlertTriangle, Clock, Wrench, Filter, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { workOrders, type WorkOrder } from "@/data/maintenanceMockData";
