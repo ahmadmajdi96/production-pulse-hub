@@ -93,6 +93,7 @@ export default function DashboardScreen() {
             return (
               <div
                 key={line.id}
+                onClick={() => navigate('/supervisor/run-detail')}
                 className="data-card flex items-center gap-4 p-3 cursor-pointer hover:border-primary/30 transition-colors"
               >
                 <div className="flex-1 min-w-0">
