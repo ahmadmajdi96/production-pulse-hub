@@ -4,6 +4,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { AppLayout } from "@/components/AppLayout";
+import { SupervisorLayout } from "@/components/SupervisorLayout";
 import RunStatusScreen from "./pages/RunStatusScreen";
 import CCPScreen from "./pages/CCPScreen";
 import SPCScreen from "./pages/SPCScreen";
@@ -12,6 +13,9 @@ import ShiftScreen from "./pages/ShiftScreen";
 import TransitionScreen from "./pages/TransitionScreen";
 import CIPScreen from "./pages/CIPScreen";
 import IdleScreen from "./pages/IdleScreen";
+import DashboardScreen from "./pages/supervisor/DashboardScreen";
+import RunStartWizardScreen from "./pages/supervisor/RunStartWizardScreen";
+import ScheduleScreen from "./pages/supervisor/ScheduleScreen";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
