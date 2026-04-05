@@ -1,6 +1,7 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import { LayoutDashboard, Rocket, Calendar, ArrowLeft, Activity, ArrowRightLeft, FileWarning, BookOpen, Shield, Clock, Wrench } from "lucide-react";
+import { LayoutDashboard, Rocket, Calendar, Activity, ArrowRightLeft, FileWarning, BookOpen, Shield, Clock } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { AppSwitcher } from "./AppSwitcher";
 
 const tabs = [
   { path: '/supervisor', label: 'Home', icon: LayoutDashboard },
@@ -12,7 +13,6 @@ const tabs = [
   { path: '/supervisor/logbook', label: 'Log', icon: BookOpen },
   { path: '/supervisor/ptw', label: 'PTW', icon: Shield },
   { path: '/supervisor/downtime', label: 'Down', icon: Clock },
-  { path: '/maintenance', label: 'EA3', icon: Wrench },
 ];
 
 export function SupervisorNav() {
@@ -22,13 +22,7 @@ export function SupervisorNav() {
   return (
     <nav className="fixed bottom-0 left-0 right-0 z-40 border-t border-border bg-card/95 backdrop-blur-sm">
       <div className="flex h-16">
-        <button
-          onClick={() => navigate('/')}
-          className="flex flex-col items-center justify-center gap-0.5 px-4 text-[10px] font-medium text-muted-foreground hover:text-foreground transition-colors border-r border-border"
-        >
-          <ArrowLeft className="h-4 w-4" />
-          <span>EA1</span>
-        </button>
+        <AppSwitcher current="EA2" />
         {tabs.map(({ path, label, icon: Icon }) => {
           const isActive = location.pathname === path;
           return (
