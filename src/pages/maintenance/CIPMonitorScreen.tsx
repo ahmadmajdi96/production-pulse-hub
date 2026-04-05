@@ -1,9 +1,11 @@
+import { useState, useEffect } from "react";
 import { ArrowLeft, Check, AlertTriangle, Droplets, Thermometer, Wind, FlaskConical, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
-import { cipCycleExec } from "@/data/maintenanceMockData";
+import { cipCycleExec, type CIPCycleExec } from "@/data/maintenanceMockData";
+import { jitter, advanceElapsed } from "@/hooks/useSimulation";
 
 const stepStatusColors: Record<string, string> = {
   completed: 'bg-status-running',
@@ -14,7 +16,47 @@ const stepStatusColors: Record<string, string> = {
 
 export default function CIPMonitorScreen() {
   const navigate = useNavigate();
-  const c = cipCycleExec;
+  const [c, setC] = useState<CIPCycleExec>(cipCycleExec);
+
+  // Simulate CIP progress every 3s
+  useEffect(() => {
+    const id = setInterval(() => {
+      setC(prev => {
+        const steps = prev.steps.map(step => {
+          if (step.status === 'active') {
+            const newElapsed = advanceElapsed(step.elapsed, step.duration);
+            if (newElapsed >= step.duration) {
+              return { ...step, elapsed: step.duration, status: 'completed' as const, result: 'PASS' as const };
+            }
+            return { ...step, elapsed: newElapsed };
+          }
+          return step;
+        });
+        // Activate next pending step if current active just completed
+        const hasActive = steps.some(s => s.status === 'active');
+        if (!hasActive) {
+          const nextPending = steps.findIndex(s => s.status === 'pending');
+          if (nextPending !== -1) {
+            steps[nextPending] = { ...steps[nextPending], status: 'active' };
+          }
+        }
+        const allDone = steps.every(s => s.status === 'completed');
+        return {
+          ...prev,
+          steps,
+          outcome: allDone ? 'PASS' : prev.outcome,
+          tact: {
+            temperature: { ...prev.tact.temperature, actual: jitter(prev.tact.temperature.actual, 0.01) },
+            flow: { ...prev.tact.flow, actual: jitter(prev.tact.flow.actual, 0.02) },
+            concentration: { ...prev.tact.concentration, actual: jitter(prev.tact.concentration.actual, 0.01) },
+            contactTime: { ...prev.tact.contactTime, actual: advanceElapsed(prev.tact.contactTime.actual, prev.tact.contactTime.required, 0.5) },
+          },
+        };
+      });
+    }, 3000);
+    return () => clearInterval(id);
+  }, []);
+
   const totalElapsed = c.steps.reduce((s, step) => s + step.elapsed, 0);
   const totalDuration = c.steps.reduce((s, step) => s + step.duration, 0);
 

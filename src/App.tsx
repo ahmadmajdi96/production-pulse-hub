@@ -6,6 +6,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { AppLayout } from "@/components/AppLayout";
 import { SupervisorLayout } from "@/components/SupervisorLayout";
 import { MaintenanceLayout } from "@/components/MaintenanceLayout";
+import { WarehouseLayout } from "@/components/WarehouseLayout";
 import RunStatusScreen from "./pages/RunStatusScreen";
 import CCPScreen from "./pages/CCPScreen";
 import SPCScreen from "./pages/SPCScreen";
@@ -26,6 +27,9 @@ import DowntimeLoggerScreen from "./pages/supervisor/DowntimeLoggerScreen";
 import WorkOrderQueueScreen from "./pages/maintenance/WorkOrderQueueScreen";
 import CIPMonitorScreen from "./pages/maintenance/CIPMonitorScreen";
 import LOTOScreen from "./pages/maintenance/LOTOScreen";
+import LotReceivingScreen from "./pages/warehouse/LotReceivingScreen";
+import PalletLabelingScreen from "./pages/warehouse/PalletLabelingScreen";
+import FEFOScreen from "./pages/warehouse/FEFOScreen";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -62,6 +66,11 @@ const App = () => (
           <Route path="/maintenance" element={<MaintenanceLayout><WorkOrderQueueScreen /></MaintenanceLayout>} />
           <Route path="/maintenance/cip" element={<MaintenanceLayout><CIPMonitorScreen /></MaintenanceLayout>} />
           <Route path="/maintenance/loto" element={<MaintenanceLayout><LOTOScreen /></MaintenanceLayout>} />
+
+          {/* EA4: Goods Receiving / Warehouse */}
+          <Route path="/warehouse" element={<WarehouseLayout><LotReceivingScreen /></WarehouseLayout>} />
+          <Route path="/warehouse/pallets" element={<WarehouseLayout><PalletLabelingScreen /></WarehouseLayout>} />
+          <Route path="/warehouse/fefo" element={<WarehouseLayout><FEFOScreen /></WarehouseLayout>} />
 
           <Route path="*" element={<NotFound />} />
         </Routes>

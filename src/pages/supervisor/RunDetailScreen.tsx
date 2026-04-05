@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ArrowLeft, Pause, XOctagon, ArrowRightLeft, TrendingUp, TrendingDown, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { StatusBadge } from "@/components/StatusBadge";
@@ -6,12 +6,36 @@ import { cn } from "@/lib/utils";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { runDetailData } from "@/data/supervisorMockData";
+import { jitter } from "@/hooks/useSimulation";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, ResponsiveContainer, Tooltip } from "recharts";
 
 export default function RunDetailScreen() {
   const navigate = useNavigate();
-  const run = runDetailData;
+  const [run, setRun] = useState(runDetailData);
   const [paused, setPaused] = useState(run.status === 'PAUSED');
+
+  // Live quality trend updates every 5s
+  useEffect(() => {
+    if (paused) return;
+    const id = setInterval(() => {
+      setRun(prev => {
+        const lastPoint = prev.qualityTrend[prev.qualityTrend.length - 1];
+        const newPoint = {
+          time: `+${prev.qualityTrend.length}m`,
+          brix: jitter(lastPoint.brix, 0.02),
+          ph: jitter(lastPoint.ph, 0.01),
+          temp: jitter(lastPoint.temp, 0.01),
+        };
+        return {
+          ...prev,
+          qualityTrend: [...prev.qualityTrend.slice(-11), newPoint],
+          unitsProduced: prev.unitsProduced + Math.round(prev.throughputActual / 12),
+          oee: Math.min(100, jitter(prev.oee, 0.005)),
+        };
+      });
+    }, 5000);
+    return () => clearInterval(id);
+  }, [paused]);
 
   const throughputPct = ((run.throughputActual / run.throughputTarget) * 100).toFixed(1);
   const costVariance = ((run.costPerUnit - run.costPerUnitTarget) / run.costPerUnitTarget * 100).toFixed(1);
@@ -49,7 +73,7 @@ export default function RunDetailScreen() {
 
       {/* Quality timeline sparklines */}
       <div className="data-card p-3">
-        <h2 className="text-sm font-semibold text-foreground mb-2">Quality Trend (60 min)</h2>
+        <h2 className="text-sm font-semibold text-foreground mb-2">Quality Trend (Live)</h2>
         <div className="h-40">
           <ResponsiveContainer width="100%" height="100%">
             <LineChart data={run.qualityTrend}>
@@ -57,9 +81,9 @@ export default function RunDetailScreen() {
               <XAxis dataKey="time" tick={{ fontSize: 10, fill: 'hsl(220, 10%, 50%)' }} />
               <YAxis tick={{ fontSize: 10, fill: 'hsl(220, 10%, 50%)' }} />
               <Tooltip contentStyle={{ backgroundColor: 'hsl(220, 20%, 12%)', border: '1px solid hsl(220, 14%, 20%)', borderRadius: 8, fontSize: 12 }} />
-              <Line type="monotone" dataKey="brix" stroke="hsl(210, 100%, 56%)" strokeWidth={2} dot={false} name="Brix" />
-              <Line type="monotone" dataKey="ph" stroke="hsl(142, 71%, 45%)" strokeWidth={2} dot={false} name="pH" />
-              <Line type="monotone" dataKey="temp" stroke="hsl(48, 96%, 53%)" strokeWidth={2} dot={false} name="Temp" />
+              <Line type="monotone" dataKey="brix" stroke="hsl(210, 100%, 56%)" strokeWidth={2} dot={false} name="Brix" isAnimationActive={false} />
+              <Line type="monotone" dataKey="ph" stroke="hsl(142, 71%, 45%)" strokeWidth={2} dot={false} name="pH" isAnimationActive={false} />
+              <Line type="monotone" dataKey="temp" stroke="hsl(48, 96%, 53%)" strokeWidth={2} dot={false} name="Temp" isAnimationActive={false} />
             </LineChart>
           </ResponsiveContainer>
         </div>
