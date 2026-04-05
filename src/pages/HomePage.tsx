@@ -4,15 +4,15 @@ import { cn } from "@/lib/utils";
 
 const edgeApps = [
   {
-    id: 'ea1', label: 'EA1: Operator Floor Display', path: '/',
+    id: 'ea1', label: 'EA1: Operator Floor Display', path: '/operator',
     icon: Monitor, color: 'bg-primary/15 border-primary/30 text-primary',
     description: 'Wall-mounted HMI — run status, CCP, SPC, alerts, CIP, shift handover.',
     screens: 8, status: 'RUNNING',
     quickLinks: [
-      { label: 'Run Status', path: '/' },
-      { label: 'CCP', path: '/ccp' },
-      { label: 'Alerts', path: '/alerts' },
-      { label: 'CIP', path: '/cip' },
+      { label: 'Run Status', path: '/operator' },
+      { label: 'CCP', path: '/operator/ccp' },
+      { label: 'Alerts', path: '/operator/alerts' },
+      { label: 'CIP', path: '/operator/cip' },
     ],
   },
   {
@@ -69,9 +69,15 @@ export default function HomePage() {
   return (
     <div className="min-h-screen bg-background p-6">
       <div className="max-w-4xl mx-auto space-y-6">
-        <div>
-          <h1 className="text-3xl font-bold text-foreground">Production Pulse</h1>
-          <p className="text-sm text-muted-foreground mt-1">Edge Application Suite — 5 apps · 32 screens</p>
+        <div className="flex items-center justify-between">
+          <div>
+            <h1 className="text-3xl font-bold text-foreground">Production Pulse</h1>
+            <p className="text-sm text-muted-foreground mt-1">Edge Application Suite — 5 apps · 32 screens</p>
+          </div>
+          <div className="text-right text-xs text-muted-foreground">
+            <p className="font-mono">{new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}</p>
+            <p className="font-mono text-foreground text-sm">{new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })}</p>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

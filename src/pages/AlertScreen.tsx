@@ -1,8 +1,9 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { alerts } from "@/data/mockData";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import { AlertTriangle, AlertCircle, Info, CheckCircle2 } from "lucide-react";
+import { AlertTriangle, AlertCircle, Info, CheckCircle2, Wrench } from "lucide-react";
 
 const severityConfig = {
   CRITICAL: { icon: AlertCircle, bg: 'bg-destructive', text: 'text-destructive-foreground', border: 'border-destructive' },
@@ -12,6 +13,7 @@ const severityConfig = {
 };
 
 export default function AlertScreen() {
+  const navigate = useNavigate();
   const [alertList, setAlertList] = useState(alerts);
 
   const criticalAlert = alertList.find(a => a.severity === 'CRITICAL' && !a.acknowledged);
@@ -43,7 +45,12 @@ export default function AlertScreen() {
 
   return (
     <div className="space-y-4">
-      <h1 className="text-2xl font-bold text-foreground">Alerts</h1>
+      <div className="flex items-center justify-between">
+        <h1 className="text-2xl font-bold text-foreground">Alerts</h1>
+        <button onClick={() => navigate('/maintenance')} className="flex items-center gap-1.5 rounded-full bg-muted px-3 py-1.5 text-xs font-medium text-muted-foreground hover:text-foreground transition-colors">
+          <Wrench className="h-3.5 w-3.5" /> Work Orders
+        </button>
+      </div>
 
       {/* HIGH alert banner */}
       {highAlert && (

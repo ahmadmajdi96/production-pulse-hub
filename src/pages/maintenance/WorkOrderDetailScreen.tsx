@@ -78,9 +78,9 @@ export default function WorkOrderDetailScreen() {
               'bg-muted text-muted-foreground'
             )}>{wo.priority}</span>
           </div>
-          <div>
+          <div className="cursor-pointer" onClick={() => navigate(`/maintenance/asset?id=${wo.id}`)}>
             <p className="text-[10px] text-muted-foreground">Health Score</p>
-            <span className={cn("font-mono text-lg font-bold",
+            <span className={cn("font-mono text-lg font-bold underline decoration-dotted",
               wo.assetHealthScore < 30 ? "text-status-critical" :
               wo.assetHealthScore < 60 ? "text-status-warning" :
               "text-status-running"

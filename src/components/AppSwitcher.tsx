@@ -4,8 +4,8 @@ import { Home, Monitor, UserCog, Wrench, Package, Zap, Grid3X3 } from "lucide-re
 import { cn } from "@/lib/utils";
 
 const apps = [
-  { path: '/home', label: 'Home', icon: Home },
-  { path: '/', label: 'EA1', icon: Monitor, desc: 'Operator' },
+  { path: '/', label: 'Home', icon: Home },
+  { path: '/operator', label: 'EA1', icon: Monitor, desc: 'Operator' },
   { path: '/supervisor', label: 'EA2', icon: UserCog, desc: 'Supervisor' },
   { path: '/maintenance', label: 'EA3', icon: Wrench, desc: 'Maintenance' },
   { path: '/warehouse', label: 'EA4', icon: Package, desc: 'Warehouse' },

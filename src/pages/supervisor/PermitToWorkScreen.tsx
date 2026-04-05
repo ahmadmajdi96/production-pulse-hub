@@ -82,7 +82,7 @@ export default function PermitToWorkScreen() {
 
       {/* PTW Context */}
       <div className="rounded-lg bg-muted p-3 text-sm space-y-1">
-        <div className="flex justify-between"><span className="text-muted-foreground">Work Order</span><span className="font-mono text-foreground">WO-2026-0891</span></div>
+        <div className="flex justify-between"><span className="text-muted-foreground">Work Order</span><span className="font-mono text-primary cursor-pointer underline" onClick={() => navigate('/maintenance/wo?id=WO-2026-0891')}>WO-2026-0891</span></div>
         <div className="flex justify-between"><span className="text-muted-foreground">Equipment</span><span className="text-foreground">Conveyor Belt Motor — Line 5</span></div>
         <div className="flex justify-between"><span className="text-muted-foreground">Work Type</span><span className="text-foreground">Electrical Isolation</span></div>
         <div className="flex justify-between"><span className="text-muted-foreground">Technician</span><span className="text-foreground">R. Nakamura</span></div>

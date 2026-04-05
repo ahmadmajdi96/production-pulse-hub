@@ -53,17 +53,18 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           {/* Home / App Launcher */}
+          <Route path="/" element={<HomePage />} />
           <Route path="/home" element={<HomePage />} />
 
           {/* EA1: Operator Floor Display */}
-          <Route path="/" element={<AppLayout><RunStatusScreen /></AppLayout>} />
-          <Route path="/ccp" element={<AppLayout><CCPScreen /></AppLayout>} />
-          <Route path="/spc" element={<AppLayout><SPCScreen /></AppLayout>} />
-          <Route path="/alerts" element={<AppLayout><AlertScreen /></AppLayout>} />
-          <Route path="/shift" element={<AppLayout><ShiftScreen /></AppLayout>} />
-          <Route path="/transition" element={<AppLayout><TransitionScreen /></AppLayout>} />
-          <Route path="/cip" element={<AppLayout><CIPScreen /></AppLayout>} />
-          <Route path="/idle" element={<AppLayout><IdleScreen /></AppLayout>} />
+          <Route path="/operator" element={<AppLayout><RunStatusScreen /></AppLayout>} />
+          <Route path="/operator/ccp" element={<AppLayout><CCPScreen /></AppLayout>} />
+          <Route path="/operator/spc" element={<AppLayout><SPCScreen /></AppLayout>} />
+          <Route path="/operator/alerts" element={<AppLayout><AlertScreen /></AppLayout>} />
+          <Route path="/operator/shift" element={<AppLayout><ShiftScreen /></AppLayout>} />
+          <Route path="/operator/transition" element={<AppLayout><TransitionScreen /></AppLayout>} />
+          <Route path="/operator/cip" element={<AppLayout><CIPScreen /></AppLayout>} />
+          <Route path="/operator/idle" element={<AppLayout><IdleScreen /></AppLayout>} />
 
           {/* EA2: Supervisor Mobile App */}
           <Route path="/supervisor" element={<SupervisorLayout><DashboardScreen /></SupervisorLayout>} />
