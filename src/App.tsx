@@ -25,6 +25,7 @@ import NCRQuickCreateScreen from "./pages/supervisor/NCRQuickCreateScreen";
 import ShiftLogbookScreen from "./pages/supervisor/ShiftLogbookScreen";
 import PermitToWorkScreen from "./pages/supervisor/PermitToWorkScreen";
 import DowntimeLoggerScreen from "./pages/supervisor/DowntimeLoggerScreen";
+import OEEDashboardScreen from "./pages/supervisor/OEEDashboardScreen";
 import WorkOrderQueueScreen from "./pages/maintenance/WorkOrderQueueScreen";
 import WorkOrderDetailScreen from "./pages/maintenance/WorkOrderDetailScreen";
 import AssetHealthScreen from "./pages/maintenance/AssetHealthScreen";
@@ -76,6 +77,7 @@ const App = () => (
           <Route path="/supervisor/logbook" element={<SupervisorLayout><ShiftLogbookScreen /></SupervisorLayout>} />
           <Route path="/supervisor/ptw" element={<SupervisorLayout><PermitToWorkScreen /></SupervisorLayout>} />
           <Route path="/supervisor/downtime" element={<SupervisorLayout><DowntimeLoggerScreen /></SupervisorLayout>} />
+          <Route path="/supervisor/oee" element={<SupervisorLayout><OEEDashboardScreen /></SupervisorLayout>} />
 
           {/* EA3: Maintenance Technician App */}
           <Route path="/maintenance" element={<MaintenanceLayout><WorkOrderQueueScreen /></MaintenanceLayout>} />

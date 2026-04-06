@@ -1,5 +1,5 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import { LayoutDashboard, Rocket, Calendar, Activity, ArrowRightLeft, FileWarning, BookOpen, Shield, Clock } from "lucide-react";
+import { LayoutDashboard, Rocket, Calendar, Activity, ArrowRightLeft, FileWarning, BookOpen, Shield, Clock, Gauge } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { AppSwitcher } from "./AppSwitcher";
 
@@ -13,6 +13,7 @@ const tabs = [
   { path: '/supervisor/logbook', label: 'Log', icon: BookOpen },
   { path: '/supervisor/ptw', label: 'PTW', icon: Shield },
   { path: '/supervisor/downtime', label: 'Down', icon: Clock },
+  { path: '/supervisor/oee', label: 'OEE', icon: Gauge },
 ];
 
 export function SupervisorNav() {
