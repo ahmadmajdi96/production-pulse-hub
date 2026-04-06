@@ -1,5 +1,5 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import { LayoutDashboard, Rocket, Calendar, Activity, ArrowRightLeft, FileWarning, BookOpen, Shield, Clock } from "lucide-react";
+import { LayoutDashboard, Rocket, Calendar, Activity, ArrowRightLeft, FileWarning, BookOpen, Shield, Clock, Gauge } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { AppSwitcher } from "./AppSwitcher";
 
