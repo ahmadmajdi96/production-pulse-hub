@@ -77,6 +77,7 @@ const App = () => (
           <Route path="/supervisor/logbook" element={<SupervisorLayout><ShiftLogbookScreen /></SupervisorLayout>} />
           <Route path="/supervisor/ptw" element={<SupervisorLayout><PermitToWorkScreen /></SupervisorLayout>} />
           <Route path="/supervisor/downtime" element={<SupervisorLayout><DowntimeLoggerScreen /></SupervisorLayout>} />
+          <Route path="/supervisor/oee" element={<SupervisorLayout><OEEDashboardScreen /></SupervisorLayout>} />
 
           {/* EA3: Maintenance Technician App */}
           <Route path="/maintenance" element={<MaintenanceLayout><WorkOrderQueueScreen /></MaintenanceLayout>} />

@@ -13,6 +13,7 @@ const tabs = [
   { path: '/supervisor/logbook', label: 'Log', icon: BookOpen },
   { path: '/supervisor/ptw', label: 'PTW', icon: Shield },
   { path: '/supervisor/downtime', label: 'Down', icon: Clock },
+  { path: '/supervisor/oee', label: 'OEE', icon: Gauge },
 ];
 
 export function SupervisorNav() {
