@@ -25,6 +25,7 @@ import NCRQuickCreateScreen from "./pages/supervisor/NCRQuickCreateScreen";
 import ShiftLogbookScreen from "./pages/supervisor/ShiftLogbookScreen";
 import PermitToWorkScreen from "./pages/supervisor/PermitToWorkScreen";
 import DowntimeLoggerScreen from "./pages/supervisor/DowntimeLoggerScreen";
+import OEEDashboardScreen from "./pages/supervisor/OEEDashboardScreen";
 import WorkOrderQueueScreen from "./pages/maintenance/WorkOrderQueueScreen";
 import WorkOrderDetailScreen from "./pages/maintenance/WorkOrderDetailScreen";
 import AssetHealthScreen from "./pages/maintenance/AssetHealthScreen";
