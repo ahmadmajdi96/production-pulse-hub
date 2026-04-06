@@ -1,0 +1,9 @@
+version: "3.8"
+
+services:
+  production-pulse-edge:
+    build: .
+    ports:
+      - "6682:6682"
+    restart: unless-stopped
+    container_name: production-pulse-edge
